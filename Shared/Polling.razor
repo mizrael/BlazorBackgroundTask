@@ -1,0 +1,21 @@
+﻿@inject ICounter Counter;
+<div>
+    <h3>Polling Counter</h3>
+    <p>Current value: @Counter.Value</p>
+</div>
+@code{
+    private System.Timers.Timer _timer;
+
+    [Parameter]
+    public double Interval { get; set; }
+
+    protected override void OnInitialized()
+    {
+        _timer = new System.Timers.Timer(this.Interval);
+        _timer.Elapsed += (s, e) =>
+        {
+            InvokeAsync(() => StateHasChanged());
+        };
+        _timer.Enabled = true;
+    }
+}

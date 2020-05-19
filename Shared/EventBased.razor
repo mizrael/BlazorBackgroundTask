@@ -1,0 +1,22 @@
+﻿@inject ICounter Counter;
+<div>
+    <h3>Event-based Counter</h3>
+    <p>Current value: @Counter.Value</p>
+</div>
+@code{
+    protected override void OnInitialized()
+    {
+        Counter.OnChange += Refresh;
+    }
+
+    private void Refresh()
+    {
+        InvokeAsync(() => StateHasChanged());
+    }
+
+    public void Dispose()
+    {
+        Counter.OnChange -= Refresh;
+    }
+
+}

@@ -1,5 +1,6 @@
 using System;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace BlazorBackgroundTask
 {
@@ -8,12 +9,12 @@ namespace BlazorBackgroundTask
         public void Increment()
         {
             Interlocked.Increment(ref _value);
-            this.OnChange?.Invoke();
+            this.OnChangeAsync?.Invoke();
         }
 
         private long _value;
         public long Value => _value;
 
-        public event Action OnChange;
+        public event Func<Task> OnChangeAsync;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 
 namespace BlazorBackgroundTask
 {
@@ -6,6 +7,6 @@ namespace BlazorBackgroundTask
     {
         long Value { get; }
         void Increment();
-        event Action OnChange;
+        event Func<Task> OnChangeAsync;
     }
 }

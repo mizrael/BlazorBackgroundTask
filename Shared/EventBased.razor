@@ -6,17 +6,17 @@
 @code{
     protected override void OnInitialized()
     {
-        Counter.OnChange += Refresh;
+        Counter.OnChangeAsync += Refresh;
     }
 
-    private void Refresh()
+    private async Task Refresh()
     {
-        InvokeAsync(() => StateHasChanged());
+        await InvokeAsync(StateHasChanged);
     }
 
     public void Dispose()
     {
-        Counter.OnChange -= Refresh;
+        Counter.OnChangeAsync -= Refresh;
     }
 
 }
